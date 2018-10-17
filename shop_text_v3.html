@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="sharecontent" data-msg-img="" data-msg-title="花生馅市集" data-msg-content="" data-msg-callBack=""
+   	 data-line-img="" data-line-title="花生馅市集" data-line-callBack=""/>
+    <title>花生馅市集</title>
+    <link rel="stylesheet" type="text/css" href="css/shopping.min.css"/>
+    <link href="css/mui.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/vue.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="js/login_public_750_v4.js?t=201806222114"></script>
+    <script id="spay-script" src="https://jspay.beecloud.cn/1/pay/jsbutton/returnscripts?appId=32fb8378-a6e4-4c68-a14b-277cd25f9001"></script>
+</head>
+<style>
+		.mui-control-content {
+			background-color: white;
+			min-height: 215px;
+		}
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+	</style>
+<body style="margin: 0;padding: 0;">
+	<div class="box">
+		<div class="banner">
+			<div id="slider" class="mui-slider" >
+				<div class="mui-slider-group mui-slider-loop">
+					<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img class="img_v4">
+						</a>
+					</div>
+					<!-- 第一张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img  class="img_v1">
+						</a>
+					</div>
+					<!-- 第二张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img  class="img_v2">
+						</a>
+					</div>
+					<!-- 第三张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img class="img_v3">
+						</a>
+					</div>
+					<!-- 第四张 -->
+					<div class="mui-slider-item">
+						<a href="#">
+							<img class="img_v4">
+						</a>
+					</div>
+					<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="images/img2.png" class="img_v1">
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active">1/4</div>
+					<div class="mui-indicator">2/4</div>
+					<div class="mui-indicator">3/4</div>
+					<div class="mui-indicator">4/4</div>
+				</div>
+			</div>
+	<!--<img src="images/img.png" alt="" class="mui-pull-left"/>-->
+			<!--<a href="study.html"><div class="tit">1/5</div></a>-->
+		</div>
+		<div class="concent">
+			<div class='mui-ellipsis' id="shopping">
+							<!--<span class="media-size mui-pull-left" id="c_t_price">【2人团】</span>
+							<span class="media-size-price mui-pull-left" id="salePrice">￥</span>
+							<span class="media-size-prices mui-pull-left" id="originPrice"></span>-->
+				<span class="media-size mui-pull-left media-sizes" id="c_t_price">【2人团】</span>
+				<span class="media-size-price mui-pull-left media-size-price-s" id="salePrice" style="margin-top: -5px;"></span>
+				<span class="media-size-prices mui-pull-left media-size-price_s" id="originPrice"></span>
+			</div>
+			<div class="pull-bottoms media-title mui-ellipsis-2 mui-shopping"></div>
+			<div class="shopping_stock"></div>
+		</div>
+	    <div class="shoppping_explain mui-text-center">说明:需提前5天预定快递；包邮按配送地区收取；</div> 	
+	    
+	    
+	    
+	    <div class="tab">
+	        <div class="tab-menu">
+	            <ul id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+	                <!--<li>新服</li>-->
+	                <li><a class="mui-control-item mui-active"><span class="title_border">商品详情</span><span id="title-item" class="mui-pull-right"></span></a></li>
+					<li><a class="mui-control-item"><span class="title_border">品牌信息</span></a></li>
+	            </ul>
+	        </div>
+	        <div class="tab-box">
+	            <div class="shop" style="padding: 10px 10px 0;">
+	            	<!--<link rel="stylesheet" type="text/css" href="https://static.htxq.net/Peanut/Private//UploadHtmls/Product/20180625170112825-detail.html"/>-->
+	            	<!--<iframe scrolling="auto" frameborder="0"  src="https://static.htxq.net/Peanut/Private//UploadHtmls/Product/20180625170112825-detail.html" style="width:100%;height:100%;"></iframe>-->
+	            </div>
+	            <div class="xinxi">
+	            	<!--<iframe scrolling="auto" frameborder="0" src="https://static.htxq.net/Peanut/Private//UploadHtmls/Product/20180625170112825-brand.html" style="width:100%;height:100%;"></iframe>-->
+	            </div>
+	        </div>
+	    </div>
+	    <style type="text/css">
+	    	#sliderSegmentedControl{
+	    		border-bottom:1px solid #ececec;
+	    	}
+	    	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	    		border-bottom: none;
+	    	}
+	    	#sliderSegmentedControl>li{
+	    		width: 50%;
+	    		float: left;
+	    	}
+	    	.tab-box,.tab-box div{
+	    		height: auto;
+	    		overflow: hidden;
+	    	}
+	    	.tab-box div{
+	    	   display: none;
+	    	}
+	    	.tab-box div:first-Child{display:block;} 
+	    </style>
+	</div>
+	<footer id="footer" style="display: none;">
+						<!--<a href="#"><button class="projectile_button join_projectile margin_r btn-groupbuy" id="">¥298/年  拼团购买</button></a>-->
+				<!--<a href="#"><button class="projectile_button mui-pull-right btn-cardbuy" id="projectile_button">¥518/年 直接购买</button></a>-->
+		<a href="#"><button class="projectile_button join_projectile margin_r border_button mui-text-center btn-cardbuy" id=""><span class="footer_span" id="footer_originPrice"></span><span>单独购买</span></button></a>
+		<a href="#"><button class="projectile_button mui-pull-right  mui-text-center btn-groupbuy" id="projectile_button"><span class="footer_span" id="footer_salePrice"></span><span>发起拼团</span></button></a>
+	</footer>
+</body>
+<script src="js/mui.js"></script>
+
+<script type="text/javascript">
+     function getLocationHrefPara(paraName){	//获取location里的带名参数
+        var reg = new RegExp("(^|&)" + paraName + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    };
+
+   $(document).ready(function(){
+    var orderId = getLocationHrefPara("orderId");
+    var productId = getLocationHrefPara("productId");
+    console.log(productId)
+    var uno = getLocationHrefPara("uno");
+    var origin = encodeURIComponent(getLocationHrefPara("origin"));
+//     var uno = getLocationHrefPara("uno");
+//     var origin = getLocationHrefPara("origin");
+//     var orderId = getLocationHrefPara("orderId");
+
+       var userId= getCookie("user");
+       var token = localStorage.getItem("HTXQToken");
+//     var checkGroupBuyUrl = location.protocol + "//" + window.location.host + "/cactus/researchCommunity/checkGroupBuy?customerId=" + userId + "&token=" + token;
+
+		$(".btn-groupbuy").click(function(){
+			if (!userId) {
+				loginShow();
+			}else{
+				window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/shop_join.html?from=group&uno=" + uno + "&origin=" + origin + "&orderId=" + orderId;
+			}
+		});
+		$(".btn-cardbuy").click(function(){
+			 window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/shop_join.html?from=single&uno=" + uno + "&origin=" + origin + "&orderId=" + orderId;
+		});
+
+//		if (userId) {
+			
+		   $.ajax({
+//			   url: location.protocol + "//" + window.location.host + "/peanut/order/group/check?customerId=" + userId + "&token=" + token+"&goodsId="+productId,
+url: location.protocol + "//" + window.location.host + "/peanut/order/group/check?customerId=" + userId + "&token=" + token+"&goodsId="+"7017c73f-09b9-454d-a1d9-23de14ca31a7",
+			   type: 'GET',
+			   dataType: 'json',
+			   success: function (result) {
+				   console.log(result);
+				   if(result.code == "000000"){
+//                     window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/groupbuy/collage_join.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+				   }else if(result.code == "110101"){
+                       $(".btn-groupbuy").removeAttr('onclick');
+                       $(".btn-groupbuy").click(function(){
+						   window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/shopGroupbuy/shop_index.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+                       });
+				   }
+			   },
+			   error: function () {
+
+			   }
+		   });
+		   
+		   
+//		   $().ready(function(){
+		    $(".tab-menu li").mouseover(function(){
+		    //通过 .index()方法获取元素下标，从0开始，赋值给某个变量
+		        var _index = $(this).index();
+		    //让内容框的第 _index 个显示出来，其他的被隐藏
+		        $(".tab-box>div").eq(_index).show().siblings().hide();
+		    //改变选中时候的选项框的样式，移除其他几个选项的样式
+		    $(this).addClass("change").siblings().removeClass("change");
+		    });
+//		});
+		   
+		   
+		   
+		   
+		   var host="http://test.api.htxq.net/peanut";
+		    $.ajax({
+//			   url: host+"/goods/detail?customerId="+userId+"&token=" + token+"&goodsId="+productId,
+ url: host+"/goods/detail?customerId="+userId+"&token=" + token+"&goodsId="+"7017c73f-09b9-454d-a1d9-23de14ca31a7",
+			   type: 'GET',
+			   dataType: 'json',
+			   success: function (result) {
+	                console.log(result);
+	                if (result.code == "000000") {
+	                    initProduct(result.data)
+//	                              	    var html = "";
+//			   	var html2="";
+//			   	html+=result.data.detailHtml
+////			   
+//			   	$("#mui-table-view").html(html)
+//			   	(function($) {
+//					$('.mui-scroll-wrapper').scroll({
+//						indicators: true //是否显示滚动条
+//					});
+//					var html2 = "<ul class='mui-table-view' style='padding:0 30px;'>"+ data.merchantHtml+"</ul>";
+//				
+//					var item2 = document.getElementById('item2mobile');
+//					
+//					document.getElementById('slider').addEventListener('slide', function(e) {
+//						if (e.detail.slideNumber === 1) {
+//							if (item2.querySelector('.mui-loading')) {
+//								setTimeout(function() {
+//									item2.querySelector('.mui-scroll').innerHTML = html2;
+//								}, 500);
+//							}
+//						} 
+//					});
+//					var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+//					$('.mui-input-group').on('change', 'input', function() {
+//						if (this.checked) {
+//							sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+//							//force repaint
+//							sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+//						}
+//					});
+//				})(mui);
+//			   	$(".mui-table-view").html(html2)
+//				   console.log(result.data.merchantLink,result.data.detailLink);
+//				   if(result.code == "000000"){
+////                     window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/groupbuy/collage_join.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+//				   }else if(result.code == "110101"){
+//                     $(".btn-groupbuy").removeAttr('onclick');
+//                     $(".btn-groupbuy").click(function(){
+//						   window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/shopGroupbuy/shop_index.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+//                     });
+//				   }
+	                } else {
+	
+	                }
+	            },
+	            error: function () {
+	                console.log("获取数据失败")
+	            }
+//			   success: function (result) {
+//			   	if()
+//			   	 initProduct(result.data)
+
+//			   },
+		   });
+//		}
+
+   });
+    function initProduct(data) {
+        console.log(data)
+        for(var i=0;i<data.goods.goodsImage.length;i++){
+        	console.log(data.goods.goodsImage[i])
+        	$(".img_v1").attr("src",data.goods.goodsImage[0])
+        	$(".img_v2").attr("src",data.goods.goodsImage[1])
+        	$(".img_v3").attr("src",data.goods.goodsImage[2])
+        	$(".img_v4").attr("src",data.goods.goodsImage[3])	
+        }
+        $("#salePrice").text(data.groupPrice)
+        $("#originPrice").text("单购价"+data.salePrice)
+        $(".mui-shopping").text(data.goods.goodsIntroduce)
+        $(".shopping_stock").text("库存："+data.totalStock+"个")
+        $("#footer_salePrice").text(data.groupPrice)
+        $("#footer_originPrice").text(data.salePrice)
+        $(".shop").html(data.detailHtml);
+        $(".xinxi").html(data.merchantHtml);
+//        $(".shop").load(data.detailHtml);
+//        $(".xinxi").load(data.merchantHtml);
+
+   }
+   function loginSuccessAction(){
+		window.location.reload();
+     // window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/groupbuy/collage_join.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+   }
+
+    if(getLocationHrefPara("from") == "look"){
+       $("#footer").hide();
+    }
+
+</script>
+</html>

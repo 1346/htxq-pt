@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	    <meta name="sharecontent" data-msg-img="你的缩略图地址" data-msg-title="欢迎加入花田小憩研究社" data-msg-content="你的简介" data-msg-callBack=""
+	   	 data-line-img="你的缩略图地址" data-line-title="欢迎加入花田小憩研究社" data-line-callBack=""/>
+	    <title>花田小憩研究社</title>
+	    <script src="groupbuy/v2/js/mui.js"></script>
+	    <link rel="stylesheet" type="text/css" href="groupbuy/v2/css/index.min.css"/>
+	    <link href="groupbuy/v2/css/mui.css" rel="stylesheet"/>
+	    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/jquery-2.0.3.min.js"></script>
+	    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/vue.min.js"></script>
+	    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/test/login_public_750_v3.js"></script>
+	    <script id="spay-script" src="https://jspay.beecloud.cn/1/pay/jsbutton/returnscripts?appId=32fb8378-a6e4-4c68-a14b-277cd25f9001"></script>
+	    <script type="text/javascript" charset="utf-8">
+	      	mui.init();
+	    </script>
+	</head>
+	<body>
+		<div class="banner" id="introduce">
+			<section class="top_pic">
+				<img src="groupbuy/v2/images/img.png"/>
+				<img src="groupbuy/v2/images/introduce_02.gif"/>
+				<img src="groupbuy/v2/images/introduce_03.gif"/>
+				<img src="groupbuy/v2/images/introduce_04.gif"/>
+				<img src="groupbuy/v2/images/introduce.jpg" style="margin-bottom: 65px;" onclick="deleCookie()"/>
+			</section>
+			<footer id="footer">
+				<a href="#"><button class="projectile_button join_projectile margin_r btn-groupbuy" id="">¥298/年  拼团购买</button></a>
+				<a href="#"><button class="projectile_button mui-pull-right btn-cardbuy" id="projectile_button">¥518/年 直接购买</button></a>
+			</footer>
+		</div>
+	</body>
+	<script>
+
+
+    function getLocationHrefPara(paraName){	//获取location里的带名参数
+        var reg = new RegExp("(^|&)" + paraName + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    };
+
+   $(document).ready(function(){
+
+       var uno = getLocationHrefPara("uno");
+       var origin = getLocationHrefPara("origin");
+       var orderId = getLocationHrefPara("orderId");
+
+       var userId= getCookie("user");
+       console.log("userId=" + userId);
+       var token = localStorage.getItem("HTXQToken");
+       var checkGroupBuyUrl = location.protocol + "//" + window.location.host + "/cactus/researchCommunity/checkGroupBuy?customerId=" + userId + "&token=" + token;
+
+		$(".btn-groupbuy").click(function(){
+			if (!userId) {
+				loginShow();
+			}else{
+				window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/buyCard.html?from=group&uno=" + uno + "&origin=" + origin + "&orderId=" + orderId;
+			}
+		});
+		$(".btn-cardbuy").click(function(){
+			 window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/buyCard.html?from=single&uno=" + uno + "&origin=" + origin + "&orderId=" + orderId;
+		});
+
+		if (userId) {
+		   $.ajax({
+			   url: checkGroupBuyUrl,
+			   type: 'GET',
+			   dataType: 'json',
+			   success: function (result) {
+				   console.log(result);
+				   if(result.code == "000000"){
+//                     window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/collage_join.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+				   }else if(result.code == "110101"){
+                       $(".btn-groupbuy").removeAttr('onclick');
+                       $(".btn-groupbuy").click(function(){
+						   window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/collage_index.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+                       });
+				   }
+			   },
+			   error: function () {
+
+			   }
+		   });
+		}
+
+   });
+
+   function loginSuccessAction(){
+		window.location.reload();
+     // window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/collage_join.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+   }
+
+    if(getLocationHrefPara("from") == "look"){
+       $("#footer").hide();
+    }
+
+	</script>
+</html>  

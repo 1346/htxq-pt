@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>学习卡购买</title>
+	<link rel="stylesheet" type="text/css" href="https://api.htxq.net/h5/htxq5.0/css/videoDetails.css">
+	<script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/login_public_750.js"></script>
+    <script id='spay-script' src='https://jspay.beecloud.cn/1/pay/jsbutton/returnscripts?appId=32fb8378-a6e4-4c68-a14b-277cd25f9001'></script>
+	<script type="text/javascript">
+		(function () {
+		  document.addEventListener('DOMContentLoaded', function () {
+		      var html = document.documentElement;
+		      var windowWidth = html.clientWidth;
+		      html.style.fontSize = windowWidth / 7.5 + 'px';
+		}, false);
+		})();
+	</script>
+	<style type="text/css">
+		*{
+			margin: 0;padding: 0;
+		}
+		body,html{
+			height: 100%;
+			width: 100%;
+			color:#323232;
+		}
+		iframe{
+			width: 100%;
+			height: 8rem;
+			border:none;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;  
+    		overflow-y: auto;
+		}
+		.bottom_btn{
+			width: 100%;
+			height: 2.1rem;
+			line-height: 0.12rem;
+			position: fixed;
+			left: 0;
+			bottom:0;
+			background-color: #f4f4f4;
+		}
+		#serviceBtn{
+			color: #dbb867;
+			text-decoration: underline;
+		}
+		#buy_btn{
+			width: 7.1rem;
+			border-radius: 0.06rem;
+			margin: 0 auto;
+			text-align: center;
+			background-color: #323232;
+			color: #dbb867;
+			font:bold 0.3rem/0.9rem 'lantingxihei';
+		}
+		.bottom_text{
+			font: 0.26rem/0.7rem "lantingxihei";
+			padding-left: 0.35rem;
+			padding-bottom: 0.24rem;
+		}
+		.bottom_text *{
+			vertical-align: middle;
+		}
+		.checkbox{
+			display: inline-block;
+			width: 0.4rem;
+			height: 0.3rem;
+			background: transparent url(https://htxq.oss-cn-beijing.aliyuncs.com/resources/images/htxq5.0/card_checkbox.png) left center/contain no-repeat;
+		}
+		.checked{
+			width: 0.4rem;
+			background: transparent url(https://htxq.oss-cn-beijing.aliyuncs.com/resources/images/htxq5.0/card_checkbox_checked.png) left center/contain no-repeat;
+		}
+		#statement{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			left: 0;
+			top:0;
+			background-color: #fff;
+		    -webkit-transition: all 0.3s ease-in-out;
+		    -moz-transition: all 0.3s ease-in-out;
+		    transition: all 0.3s ease-in-out;
+			-webkit-transform: translate(100%,0);
+			transform: translate(100%,0);
+			overflow: hidden;
+		}
+		.card_statement_header{
+			width: 100%;
+			height: .98rem;
+			background-color: #f9f9f9;
+			font:bold 0.34rem/0.9rem "lantingxihei";
+			border-bottom: 1px #dcdcdc solid;
+			padding: 0 0.08rem;
+		}
+		#statement_back{
+			display: inline-block;
+			height: .98rem;
+    		width: .98rem;
+    		float: left;
+			background:transparent url(https://api.htxq.net/h5/mall/images/left_2.png) center center/.2rem .34rem no-repeat;
+		}
+		.statement_mid{
+			width: 5.5rem;
+		    float: left;
+		    text-align: center;
+		}
+		#iframe1Box,#iframe2Box{
+			-webkit-overflow-scrolling: touch;
+			overflow-y: scroll;
+		}
+	</style>
+</head>
+<body onload="computedIframeHeight()">
+	<section id="iframe1Box">
+		<iframe class="learningCardIframe" src="../htxq5.0/learningCard.html" id="iframe1"></iframe>
+	</section>
+	<section class="bottom_btn" id="bottomBtn">
+		<aside class="bottom_text">
+			<span class="checkbox checked"></span>
+			<span>我自愿同意购买</span>
+			<span id="serviceBtn">学习卡服务协议</span>
+		</aside>
+		<section id="buy_btn">
+			立即购买<!-- 
+			 --><img src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/images/htxq5.0/card_btn.png" style="width: 0.22rem;margin-left: 0.1rem;">
+		</section>
+	</section>
+	<section id="statement">
+		<header class="card_statement_header" id="card_statement_header">
+			<span id="statement_back"></span>
+			<span class="statement_mid">学习卡服务协议</span>
+		</header>
+		<section id="iframe2Box">
+			<iframe src="https://api.htxq.net/h5/htxq5.0/statement.html" id="iframe2"></iframe>
+		</section>
+		
+	</section>
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+			$(".learningCardIframe").attr("src","../htxq5.0/learningCard.html?from=" + getLocationHrefPara("from"));
+
+		});
+
+		var uno = getLocationHrefPara("uno");
+		var origin = getLocationHrefPara("origin");
+		/*让图片加载出来，防止点击仿checkbox发生闪烁*/
+		var oImg 	= new Image();
+		oImg.src 	= "https://htxq.oss-cn-beijing.aliyuncs.com/resources/images/htxq5.0/card_checkbox.png";
+		var host	= window.location.host;
+		var openId = sessionStorage.getItem("HTXQopenId") == null ? "" : sessionStorage.getItem("HTXQopenId");
+		var userId	= getCookie("user");
+		var equip = judegEquipment();
+		var token = "";
+		(function(){
+			if (equip == "weixin") {		//为微信浏览器
+                if ( !openId ){
+					var code = getLocationHrefPara("code");
+					if ( code ) {
+						getWXUserInformation(code);
+					}else{
+						weixinLogin(0);
+					}
+				}
+			}else{							//为外部浏览器
+
+			}
+		})();
+		function getWXUserInformation(userCode){
+			$.ajax({
+			    type: 'GET',
+			    async: true,
+				url:location.protocol + "//" + host + '/cactus/customer/ppopenid?code=' + userCode,
+			    dataType : "json",
+		        data: {},
+			    success: function (json) {
+			    	console.log(json);
+			    	if ( json.code == "000000") {
+			    		sessionStorage.setItem( "HTXQopenId", json.data.openId);
+			    		openId = json.data.openId;
+			    	}
+			    	/*else if ( userId == "" ) {
+			    		window.location.href = "./index.html";
+			    	}*/
+			    	else {
+			    		showWrong( json.text );
+			    	};
+					console.log("微信接口获取openId");
+			    },
+			    complete: function () {
+			    },
+			    error: function (xhr, textStatus, errorThrown) {
+			        showWrong("服务器请求失败");
+			    }
+			})
+		};
+		// function weixinLogin(oppositeId){		//进行微信登录授权
+		// 	var nowHref = window.location.href;
+		// 	var weixinHref = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8f420ac9c4b08502&redirect_uri=" + nowHref + "&response_type=code&scope=snsapi_base&state=" + oppositeId + "#wechat_redirect";
+		// 	window.location.href = weixinHref;
+		// };
+		function weixinLogin(oppositeId){			//进行微信登录授权
+			var nowHref = window.location.href;
+			var weixinHref = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8f420ac9c4b08502&redirect_uri=https://api.htxq.net/h5/redirect.html?page=" + encodeURIComponent(nowHref) + "&response_type=code&scope=snsapi_base&state=" + oppositeId + "#wechat_redirect";
+			window.location.href = weixinHref;
+		};
+		/*计算两个iframe及其父级盒子的高度*/
+		function computedIframeHeight(){
+			var nBottomHeight 	= document.getElementById('bottomBtn').offsetHeight;
+			var nStateHeight 	= document.getElementById('card_statement_header').offsetHeight;
+			var nWindowHeight 	= window.innerHeight;
+
+			document.getElementById('iframe1').style.height 	= nWindowHeight - nBottomHeight + "px";
+			document.getElementById('iframe1Box').style.height 	= nWindowHeight - nBottomHeight + "px";
+
+			document.getElementById('iframe2').style.height 	= nWindowHeight - nStateHeight + "px";
+			document.getElementById('iframe2Box').style.height 	= nWindowHeight - nStateHeight + "px";
+			console.log(nBottomHeight);
+			console.log(nWindowHeight);
+		}
+		$(".checkbox").on("touchend",function(){
+			$(".checkbox").toggleClass('checked');
+		});
+		$("#serviceBtn").on("touchend",function(event){
+			$("#statement").css('transform', 'translate(0,0)');
+			event.stopPropagation();
+		});
+		$("#statement_back").on('click', function(event) {
+			$("#statement").css('transform', 'translate(100%,0)');
+		});
+		$("#buy_btn").on('click', function(event) {
+			if (!userId) {
+				loginShow();
+			}else{
+				if ( !$(".checkbox").eq(0).hasClass('checked') ) {
+					showWrong("请勾选学习卡服务协议")
+				}else{								/*???????????*/
+
+					if (equip == "weixin"){
+						beePay("",userId);
+					}else{
+						wxPayH5(userId);
+					}
+				}
+			}
+			event.preventDefault();
+		});
+
+		var wxpayUrlPath;
+		var blpayUrlPath;
+		var fromData = getLocationHrefPara("from");
+		if(fromData == "group"){
+			wxpayUrlPath = "/cactus/researchCommunity/buyCardWxH5Group";
+			blpayUrlPath = "/cactus/researchCommunity/buyCardWxGroup";
+		}else{
+			wxpayUrlPath = "/cactus/researchCommunity/buyCardWxH5"; 
+			blpayUrlPath = "/cactus/researchCommunity/buyCardWx";
+		}
+
+		/* 支付方法*/
+		function wxPayH5(customerId){	//外部浏览器支付方法
+			var reqUrl = location.protocol + "//" + window.location.host + wxpayUrlPath + "?customerId=" + customerId + "&&token=" + (localStorage.getItem("HTXQToken") || token) + "&&uno=" + uno + "&origin=" + origin;
+			$.ajax({
+				url: reqUrl,
+				type: 'POST',
+			})
+			.done(function(json) {
+				if (json.code == "000000" )  {
+                    if(fromData == "group"){
+                        window.location.href = json.data + "&redirect_url=" + encodeURI(location.protocol + "//" + window.location.host + "/h5/WXactivity/groupbuy/collage_index.html");
+                    }else{
+                        window.location.href = json.data;
+                    }
+				}else if( json.code == "100000" ){
+					showWrong(json.text);
+					loginShow();
+				}else{
+					showWrong(json.text);
+				}
+			})
+			.fail(function() {
+				showWrong("服务器请求失败")
+			})
+		}
+		function beePay(paymentNo,customerId){
+		  $.ajax({
+				type: 'POST',
+				async: true,
+				url: location.protocol + "//" + window.location.host + blpayUrlPath + "?customerId=" + customerId + "&&token=" + (localStorage.getItem("HTXQToken") || token) + "&&uno=" + uno + "&origin=" + origin,
+				dataType : "json",
+				contentType: "application/json; charset=utf-8",
+				data: {},
+				success: function (json) {
+					console.log(json);
+					if (json.code == "000000" ) {
+						var out_trade_no    = json.data.out_trade_no;           //订单号
+						var title           = json.data.title;                  //订单标题
+						var amount          = json.data.amount;                 //付款金额
+						var sign            = json.data.sign;                   //订单签名
+						var customerId      = json.data.optional.customerId;    //
+						var paymentNo       = json.data.optional.paymentNo;   	//
+						var business        = json.data.optional.business;  	//
+						var customerNo      = json.data.optional.customerNo;  	//
+						// alert(json);
+						bcPay(out_trade_no,title,amount,sign,customerId,paymentNo,business,customerNo);
+					}else if( json.code == "100000" ){
+						showWrong(json.text);
+						loginShow();
+					}else{
+						showWrong(json.text);
+					}
+				},
+				error: function (xhr, textStatus, errorThrown) {
+				  showWrong("服务器请求失败");
+				}
+		  })
+		};	
+		function bcPay(out_trade_no,title,amount,sign,customerId,paymentNo,business,customerNo) {
+		    BC.err = function(data) {
+		        //注册错误信息接受
+		        console.log(data)
+		        showWrong(data["ERROR"]);
+		        // $(".open").hide();
+		    }
+		    BC.click({
+		        "title": title,
+		        "amount": amount,
+		        "out_trade_no": out_trade_no,               //唯一订单号
+		        "sign" : sign,
+		        "openid" : openId,
+		        // "return_url":"http://www.hao123.com/",
+		        "instant_channel":"wx",
+		        "optional": {"customerId": customerId,"paymentNo":paymentNo,"business":business,"customerNo":customerNo}
+		    },
+		    {
+		        wxJsapiFinish : function(res) {
+		        },
+		        wxJsapiSuccess:function(res){
+                    if(fromData == "group"){
+						window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/groupbuy/collage_index.html";
+                    }else{
+                        window.location.href = "./buyCard/payResult.html?result=true";
+                    }
+		        },
+		        wxJsapiFail:function(res){
+		     		window.location.href = "./buyCard/payResult.html";
+		        }
+		    });
+		}
+		/* 支付方法 end*/
+
+	    var share = {
+	    	title:"加入花田小憩研究社",
+	    	imgUrl:'https://htxq.oss-cn-beijing.aliyuncs.com/resources/images/htxq5.0/research_gold.jpg',
+	    	url:"https://api.htxq.net/h5/WXactivity/buyCard/cardIndex.html?uno=" + uno + "&origin=" + origin,
+	    	content:"国际名师聚集，一所没有边界的“互联网花艺研究社”。"
+	    };
+		wx.ready(function(){ 
+			weixinShare( share.title , share.url , share.imgUrl , share.content );
+		})
+
+	</script>
+</body>
+</html>

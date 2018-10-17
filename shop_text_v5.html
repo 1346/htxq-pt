@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="sharecontent" data-msg-img="" data-msg-title="花生馅市集" data-msg-content="" data-msg-callBack=""
+   	 data-line-img="" data-line-title="花生馅市集" data-line-callBack=""/>
+    <title>花生馅市集</title>
+    <link rel="stylesheet" type="text/css" href="css/shopping.min.css"/>
+    <link href="css/mui.css" rel="stylesheet"/>
+    <link href="css/mui.picker.css" rel="stylesheet"/>
+    <link href="css/mui.poppicker.css" rel="stylesheet"/>
+    <script src="js/mui.js"></script>
+    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://htxq.oss-cn-beijing.aliyuncs.com/resources/js/vue.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+    <!--<script type="text/javascript" src="http://htxq.oss-cn-beijing.aliyuncs.com/test/login_public_750_v3(1).js"></script>-->
+    <script type="text/javascript" src="js/login_public_750_v4.js?t=201806222114"></script>
+
+    <script type="text/javascript" src="js/mui.picker.js"></script>
+    <script type="text/javascript" src="js/mui.poppicker.js"></script>
+    <script type="text/javascript" src="js/city.data.js"></script>
+    <!--<script id="spay-script" src="https://jspay.beecloud.cn/1/pay/jsbutton/returnscripts?appId=32fb8378-a6e4-4c68-a14b-277cd25f9001"></script>-->
+    <script type="text/javascript" charset="utf-8">
+        mui.init();
+    </script>
+</head>
+<style>
+		.mui-control-content {
+			background-color: white;
+			min-height: 215px;
+		}
+		.mui-control-content .mui-loading {
+			margin-top: 50px;
+		}
+	</style>
+<body style="margin: 0;padding: 0;">
+	<div class="box">
+		<div class="banner">
+			<div id="slider" class="mui-slider" >
+						
+				<div class="mui-slider-group mui-slider-loop" style="transform: translate3d(-375px, 0px, 0px);translateZ(0px); transition-duration: 0ms;"></div>
+				<div class="mui-slider-indicator" id="mui-slider-indicator"></div>
+			</div>
+		</div>
+		<div class="concent">
+				<ul id="taglist" style="display: none;">
+					<li class="taglist"></li>
+				</ul>			
+			<div class='mui-ellipsis' id="shopping">
+
+				<!--<span ></span>-->			
+				<!--<span class="media-size mui-pull-left media-sizes" id="c_t_price">【2人团】</span>-->
+				<span id="goodsName"></span>
+				<span class="media-size-prices mui-pull-left media-size-price_s" id="originPrice"></span>
+				<span class="media-size-price mui-pull-left media-size-price-s salePrice"></span>
+
+			</div>
+			<div class="pull-bottoms media-title mui-ellipsis-2 mui-shopping"></div>
+			<div class="shopping_stock"></div>
+		</div>
+	    <div class="shoppping_explain mui-text-center">说明:需提前5天预定快递；包邮按配送地区收取；</div> 	
+	    
+	    
+	    
+	    <div class="tab">
+	        <div class="tab-menu">
+	            <ul id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+	                <li><a class="mui-control-item mui-active"><span class="title_border">商品详情</span><span id="title-item" class="mui-pull-right"></span></a></li>
+					<li><a class="mui-control-item"><span class="title_border">品牌信息</span></a></li>
+	            </ul>
+	        </div>
+	        <div class="tab-box">
+	            <div class="shop" style="padding: 10px 10px 0;"></div>
+	            <div class="xinxi" style="margin-bottom: 65px;"></div>
+	        </div>
+	    </div>
+	    <style type="text/css">
+	    	#taglist{
+	    		width: 100%;
+	    		overflow: hidden;
+	    		height: auto;
+	    		list-style: none;
+	    	}
+	    	.taglist {
+	    		list-style: none;
+	    		float:left !important;
+				color:#D56B6B !important;
+				border:1px solid #D56B6B;
+				height:21px;
+				font-size:14px;
+				line-height:21px;
+				padding:0px 5px;
+				border-radius:3px;
+				margin-bottom: 10px;
+				font-weight:bold;
+				margin-right:15px;
+			}
+	    	#sliderSegmentedControl{
+	    		border-bottom:1px solid #ececec;
+	    		list-style: none;
+			    padding: 0;
+			    margin: 0;
+	    	}
+	    	.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	    		border-bottom: none;
+	    	}
+	    	#sliderSegmentedControl>li{
+	    		width: 50%;
+	    		float: left;
+	    	}
+	    	.tab-box,.tab-box div{
+	    		height: auto;
+	    		overflow: hidden;
+	    	}
+	    	.tab-box div{
+	    	   display: none;
+	    	}
+	    	.tab-box div:first-Child{display:block;} 
+	    	.seller_info li:last-child{
+	    		border-bottom: 0;
+	    	}
+	    </style>
+	</div>
+	<footer id="footer">
+						<!--<a href="#"><button class="projectile_button join_projectile margin_r btn-groupbuy" id="">¥298/年  拼团购买</button></a>-->
+				<!--<a href="#"><button class="projectile_button mui-pull-right btn-cardbuy" id="projectile_button">¥518/年 直接购买</button></a>-->
+		<a href="#"><button class="projectile_button join_projectile margin_r border_button mui-text-center btn-cardbuy" id=""><span class="footer_span" id="footer_originPrice"></span><span>单独购买</span></button></a>
+		<a href="#"><button class="projectile_button mui-pull-right  mui-text-center btn-groupbuy" id="projectile_button"><span class="footer_span" id="footer_salePrice"></span><span>发起拼团</span></button></a>
+	</footer>
+	
+	<!--遮罩-->
+<div id="commodity_screen"></div>
+
+<!--商品规格-->
+<div class="commodity_attr_box" id="commodity_box">
+    <image src='http://api.htxq.net/h5/mall/images/close.png' id='close'></image>
+    <div class="commodity_attr_top">
+        <img src="" class="commodity_shop_img"/>
+    </div>
+    <!--拼团价范围-->
+    <ul class="price" style="display: none;">
+        <li class="salePriceRange"></li>
+    </ul>
+    <!--售价范围-->
+    <ul class="price_sale" style="display: none;">
+    	<li class="PriceRange"></li>
+    </ul>
+    <ul class="totalStocks">
+        <li class="totalStock"></li>
+        <li class="expressPrice"></li>
+    </ul>
+    <ul class="spec1">
+        <div class="title1"></div>
+        <li class="spec1_button" v-for="(specOne,index) in specOneList" :class="index == isactive ? 'specOneList_active':''" :id="specOne.specId" @click.stop.prevent="spec1Button($event,index)">{{specOne.specName}}
+        </li>
+    </ul>
+    <ul class="spec2">
+        <div class="title2"></div>
+        <li class="spec2_button" v-for="(specTwo,index) in specTwoList" :class="index == isactive ? 'specTwoList_active':''" :id="specTwo.specId" @click.stop.prevent="spec2Button($event,index)">{{specTwo.specName}}
+        </li>
+    </ul>
+    <ul class="pay_num">
+        <li class="pay_title">选择数量</li>
+        <li class="pay_button">
+            <button class="btn_reduce" @click.stop.prevent="btnReduce" :disabled="num==1" :id="num">-</button>
+            <span class="num">{{num}}</span>
+            <button class="btn_add" @click.stop.prevent="btnAdd" :id="num">+</button>
+        </li>
+    </ul>
+    <div class="cart_alert"></div>
+    <div id="button_sale" class="button_btn" style="display: none;">确定</div>
+    <div id="button_group" class="button_btn" style="display: none;">确定</div>
+</div>
+<!--收货信息-->
+<div class="box_address">
+    <h1>确认收货信息</h1>
+    <!--<div class="close_address mui-action-back mui-icon mui-icon-closeempty mui-pull-right"></div>-->
+    <ul id="list">
+        <li class="address_list">
+            <label class="list_label">收货人</label>
+            <input type="text" placeholder="填写收货人" class="label_input" id="user" :value="userMsg" v-model="userMsg" maxlength="16" minlength="8"/>
+        </li>
+        <li class="address_list">
+            <label class="list_label">手机号码</label>
+            <input type="text" maxlength="11" placeholder="填写手机号码" class="label_input" id="plone" :value="ploneMsg" v-model="ploneMsg"/>
+        </li>
+        <li class="address_list" id='showCityPicker'/>
+        <label class="list_label">所在地区</label>
+        <input id='cityResult' type="text" placeholder="选择地区" class="label_input" readonly="readonly" value=""/>
+        </li>
+        <li class="address_list">
+            <label class="list_label">详细地址</label>
+            <input type="text" placeholder="填写详细地址" class="label_input" id="address" :value="addressMsg" v-model="addressMsg"/>
+        </li>
+    </ul>
+    <div class="box_alert"></div>
+    <div id="btn_address" @click="btnAddress">确认</div>
+</div>    
+</body>
+<style type="text/css">
+
+    [v-cloak] {
+        display: none !important;
+    }
+
+    /*背景遮罩*/
+    #commodity_screen {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #000;
+        opacity: 0.3;
+        overflow: hidden;
+        z-index: 1000;
+        color: #fff;
+        display: none;
+    }
+    
+        /*收货地址*/
+    #list {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .box_alert {
+        width: 110px;
+        height: 28px;
+        background: #323232;
+        color: #fff;
+        margin-left: -55px;
+        border-radius: 5px;
+        position: absolute;
+        top: -20%;
+        text-align: center;
+        font-size: 12px;
+        line-height: 28px;
+        left: 50%;
+        display: none;
+    }
+
+    .box_address {
+        width: 280px;
+        height: 290px;
+        border-radius: 5px;
+        background: #fff;
+        padding: 20px 15px 15px;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        margin-left: -140px;
+        z-index: 1000;
+        display: none;
+    }
+
+    h1 {
+        color: #323232;
+        font-size: 15px;
+        font-family: "FZLTH_YS_GBK";
+        text-align: center;
+        /*margin-bottom: 24.5px;*/
+        margin: 0;
+    }
+
+    .address_list {
+        padding: 15px 0 9px;
+        height: auto;
+        overflow: hidden;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .list_label {
+        height: 18px;
+        line-height: 18px;
+        width: 58px;
+        margin-right: 15px;
+        color: #777;
+        font-size: 14px;
+        font-family: "FZLTXHK--GBK1-0";
+        float: left;
+    }
+
+    .label_input {
+        width: 150px !important;
+        height: 18px !important;
+        line-height: 18px !important;
+        color: #979797;
+        font-size: 12px;
+        font-family: "FZLTXHK--GBK1-0";
+        float: left;
+        /*outline: none !important;*/
+        border: none !important;
+        background: none !important;
+        /*line-height: 0 !important;*/
+        padding: 0 !important;
+        margin: 0 !important;
+
+    }
+
+    #btn_address {
+        width: 100%;
+        height: 39px;
+        line-height: 39px;
+        text-align: center;
+        background: #777;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 14px;
+        font-family: "PingFangSC-Regular";
+        margin-top: 17px;
+    }
+    /*规格选择*/
+    .cart_alert {
+        width: 60%;
+        padding: 0 10px;
+        height: 28px;
+        background: #323232;
+        color: #fff;
+        margin: 0 auto 55px;
+        border-radius: 5px;
+
+        text-align: center;
+        font-size: 12px;
+        line-height: 28px;
+        display: none;
+    }
+
+    #close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 8px;
+        right: 15px;
+        border: none;
+    }
+
+    .commodity_attr_box {
+        height: 350px;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 2000;
+        background: #fff;
+        padding-top: 12px;
+        display: none;
+    }
+
+    .commodity_attr_top {
+        position: relative;
+    }
+
+    .commodity_shop_img {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        position: absolute;
+        top: -35px;
+        float: left;
+        left: 15px;
+    }
+
+    .price, .totalStocks, .spec1, .spec2, .pay_num {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .salePriceRange, .totalStock, .specOne_price,.PriceRange,.specOne_price_sale {
+        margin-left: 115px;
+        color: #d8b765;
+        font-size: 18px;
+        list-style: none;
+    }
+
+    .totalStocks {
+        font-size: 14px;
+        margin-top: 5px;
+        margin: 0 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .totalStock, .specOne_totalStock {
+        color: #323232;
+        font-weight: bold;
+        float: left;
+        margin-left: 100px;
+        font-size: 14px;
+    }
+
+    .spectwo_price {
+        width: 20px;
+        font-size: 12px;
+        position: absolute;
+        left: 30px;
+        top: 3px;
+        /*margin-left: 40px;*/
+    }
+
+    .expressPrice {
+        color: #a5a5a5 !important;
+        float: right;
+        margin-right: 15px;
+    }
+
+    .spec1, .spec2, .pay_num {
+        padding: 10px 0;
+        margin: 0 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .title1, .title2 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .spec1_button, .spec2_button {
+        border: 1px solid #323232;
+        border-radius: 3px;
+        height: 21px;
+        padding: 0 10px;
+        /*width:45px;*/
+        text-align: center;
+        font-size: 12px;
+        line-height: 21px;
+        float: left;
+        color: #323232;
+        margin-right: 10px;
+    }
+
+    .pay_title {
+        font-size: 12px;
+        float: left;
+        line-height: 27px;
+    }
+
+    .pay_button {
+        width: 92px;
+        height: 27px;
+        border: 1px solid #ddd;
+        float: right;
+    }
+
+    .btn_reduce, .num, .btn_add {
+        display: block;
+        width: 30px;
+        float: left;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        padding: 0 !important;
+        border-right: 1px solid #ddd !important;
+    }
+
+    .num {
+        font-size: 14px;
+    }
+
+    .btn_reduce {
+        font-size: 24px;
+        line-height: 22px;
+        background: none !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-bottom: none !important;
+        outline: none;
+        border-radius: 0 !important;
+
+    }
+
+    .btn_add {
+        background: none;
+        border: none !important;
+        outline: none;
+        font-size: 20px;
+        border: none;
+        text-align: center;
+    }
+
+    .button_btn {
+        background-color: #cf5656;
+        text-align: center;
+        font-size: 18px;
+        line-height: 45px;
+        /*font:36rpx/90rpx "";*/
+        color: #fff;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+
+    }
+
+    .spec1_button.specOneList_active, .spec2_button.specTwoList_active {
+        border: 1px solid #323232;
+        border-radius: 3px;
+        /*width: 45px;*/
+        padding: 0 10px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 21px;
+        /*font: 24rpx/42rpx "";*/
+        float: left;
+        /* padding: 0 10rpx; */
+        color: #fff;
+        background: #323232;
+    }
+
+    .disabled {
+        color: #a5a5a5;
+    }
+</style>
+
+<!--<script src="js/mui.js"></script>-->
+<script>
+
+    (function ($, doc) {
+        $.init();
+        $.ready(function () {
+            /**
+             * 获取对象属性的值
+             * 主要用于过滤三级联动中，可能出现的最低级的数据不存在的情况，实际开发中需要注意这一点；
+             * @param {Object} obj 对象
+             * @param {String} param 属性名
+             */
+            var _getParam = function (obj, param) {
+                return obj[param] || '';
+            };
+            //普通示例
+
+            //-----------------------------------------
+            //级联示例
+            var cityPicker = new $.PopPicker({
+                layer: 2
+            });
+            cityPicker.setData(cityData);
+            var showCityPickerButton = doc.getElementById('showCityPicker');
+            var cityResult = doc.getElementById('cityResult');
+            showCityPickerButton.addEventListener('tap', function (event) {
+                cityPicker.show(function (items) {
+                    cityResult.value = items[0].text + "," + items[1].text;
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                });
+            }, false);
+
+        });
+    })(mui, document);
+</script>
+<script type="text/javascript">
+     function getLocationHrefPara(paraName){	//获取location里的带名参数
+        var reg = new RegExp("(^|&)" + paraName + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    };
+    var equip = judegEquipment();
+    var orderId = getLocationHrefPara("orderId");
+    var productId = getLocationHrefPara("productId");
+    console.log(productId)
+    var uno = getLocationHrefPara("uno");
+    var origin = encodeURIComponent(getLocationHrefPara("origin"));
+    var openId = sessionStorage.getItem("HTXQopenId") == null ? "" : sessionStorage.getItem("HTXQopenId");
+    var userId= getCookie("user");
+    var token = "";
+     var introduceLink = location.protocol + "//" + window.location.host + "/h5/WXactivity/shop_join.html?orderId=" + orderId + "&uno=" + uno + "&origin=" + origin;
+    
+    function initNetData() {
+//      var getGroupBuyDetailUrl;
+//      var requireReload = false;
+//      if (orderId) {
+//          getGroupBuyDetailUrl = location.protocol + "//" + window.location.host + "/peanut/order/group/lookup?groupId=" + orderId;
+//      } else {
+//          if (userId) {
+//              getGroupBuyDetailUrl = location.protocol + "//" + window.location.host + "/peanut/order/group/lookup?customerId=" + userId;
+//              requireReload = true;
+//          } else {
+//              //              window.location.href = introduceLink;
+//          }
+//      }
+//      $.ajax({
+//          url: getGroupBuyDetailUrl,
+//          type: 'get',
+//          dataType: 'json',
+//          success: function (result) {
+//              console.log(result);
+//              if (result.code == "000000") {
+//                  if (requireReload) {
+//                      /////// 缺数据
+////                      window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/shop_text.html?orderId=" + result.data.orderId;
+//                  }
+//                              initProduct(result.data)
+//              } else {
+////                                      window.location.href = introduceLink;
+//              }
+//          },
+//          error: function () {
+////                              window.location.href = introduceLink;
+//              console.log("获取数据失败")
+//          }
+//      });
+
+        $.ajax({
+            url: location.protocol + "//" + window.location.host + "/peanut/goods/detail?customerId=" + userId + "&goodsId=" + productId,
+            type: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                console.log(result);
+                if (result.code == "000000") {
+                    initProduct(result.data)
+            	    var slider = mui("#slider");
+					slider.slider({
+						interval: 0
+					});
+                } else {
+
+                }
+            },
+            error: function () {
+                console.log("获取数据失败")
+            }
+        });
+
+    }
+    
+    
+   $(document).ready(function(){
+        
+        initNetData()
+      
+		$(".btn-groupbuy").click(function(event){
+			if (!userId) {
+				loginShow();
+			}else{
+//				$(".commodity_attr_box").fadeIn(200);
+//              $("#commodity_screen").fadeIn(200);
+                $(".price").show()
+                $(".price_sale").hide()
+                $("#button_sale").hide()
+                $("#button_group").show()                
+			}
+		    if (userId) {
+                if (localStorage.getItem('ExistAddress') == 'true') {
+                    // 不显示录入收货地址
+                    // $(".box_address").hide()//地址框隐藏
+                    //遮罩 底部购物车显示
+                    $(".commodity_attr_box").fadeIn(200);
+                    $("#commodity_screen").fadeIn(200);
+                } else {
+                    console.log("不可以走这里")
+                    // 显示录入收货地址
+                    $(".box_address").fadeIn(200)//地址框显示
+                    //遮罩 显示
+                    $("#commodity_screen").fadeIn(200)
+                }
+            }
+            event.preventDefault();
+		});
+		$(".btn-cardbuy").click(function(event){
+			if (!userId) {
+				loginShow();
+			}else{
+//			    $(".commodity_attr_box").fadeIn(200);
+//              $("#commodity_screen").fadeIn(200);
+                $(".price").hide()
+                $(".price_sale").show()
+                $("#button_sale").show()
+                $("#button_group").hide()
+			}
+            if (userId) {
+                if (localStorage.getItem('ExistAddress') == 'true') {
+                    // 不显示录入收货地址
+                    // $(".box_address").hide()//地址框隐藏
+                    //遮罩 底部购物车显示
+                    $(".commodity_attr_box").fadeIn(200);
+                    $("#commodity_screen").fadeIn(200);
+                } else {
+                    console.log("不可以走这里")
+                    // 显示录入收货地址
+                    $(".box_address").fadeIn(200)//地址框显示
+                    //遮罩 显示
+                    $("#commodity_screen").fadeIn(200)
+                }
+            }
+
+            event.preventDefault();			
+		});
+        //底部购物车隐藏
+        $("#close").click(function () {
+            $("#commodity_screen").fadeOut(200);
+            $(".commodity_attr_box").fadeOut(200);
+        }); 
+	    $(".tab-menu li").mouseover(function(){
+	    //通过 .index()方法获取元素下标，从0开始，赋值给某个变量
+	        var _index = $(this).index();
+	    //让内容框的第 _index 个显示出来，其他的被隐藏
+	        $(".tab-box>div").eq(_index).show().siblings().hide();
+	    //改变选中时候的选项框的样式，移除其他几个选项的样式
+	    $(this).addClass("change").siblings().removeClass("change");
+	    });
+    });
+    
+    function initProduct(data) {
+        console.log(data)
+
+        //轮播图循环
+        for(var i=0;i<data.goods.goodsImage.length;i++){
+        	console.log(data.goods.goodsImage[i])
+        	$(".mui-slider-group").append("<div class='mui-slider-item' id='img"+[i]+"'><a href='#'><img src="+data.goods.goodsImage[i]+"></a></div>");
+        }
+        var clone = $(".mui-slider-group .mui-slider-item").first().clone().addClass("mui-slider-item-duplicate");//克隆第一张图片
+        var clone_last = $(".mui-slider-group .mui-slider-item").last().clone().addClass("mui-slider-item-duplicate");//克隆最后一张图片
+    	console.log(clone,clone_last)
+        $(".mui-slider-group").append(clone);
+        $(clone_last).prependTo(".mui-slider-group")
+        //轮播图标识
+        var length=$(".mui-slider-item").length-2;
+        console.log(length)
+        for(var i=0;i<length;i++){        			
+        	if(i==0){
+	            $("#mui-slider-indicator").append("<div class='mui-indicator mui-active'>"+[i+1]+"/"+length+"</div>")
+	        }
+	        else {
+	            $("#mui-slider-indicator").append("<div class='mui-indicator'>"+[i+1]+"/"+length+"</div>")
+	        }
+        }
+        
+        $(".salePrice").text("拼团价:"+data.groupPrice)
+        $(".PriceRange").text(data.salePriceRange)
+        $("#originPrice").text("单购价"+data.salePrice)
+        $(".mui-shopping").text(data.goods.goodsIntroduce)
+//      $(".shopping_stock").text("库存："+data.totalStock+"个")
+        $("#footer_salePrice").text(data.groupPrice)
+        $("#footer_originPrice").text(data.salePrice)
+        $(".shop").html(data.detailHtml);
+        $(".xinxi").html(data.merchantHtml);
+        if(data.tagList.length!=0){
+        	$("#taglist").show()
+        	$(".taglist").text(data.tagList)
+        }else if(data.tagList==0){
+        	$(".taglist").hide()
+        	$("#taglist").hide()
+        }
+        $("#goodsName").text(data.goods.goodsName)
+        //规格选择
+        $("#shop_img").attr("src", data.goods.shareImage)
+        $("#goods_name").text(data.goods.goodsName)
+        $("#goods_goodsIntroduce").text(data.goods.goodsIntroduce)
+//      $("#salePrice").text(data.groupPrice);
+        $("#originPrice").text(data.cheapestPrice);
+        $(".commodity_shop_img").attr("src", data.goods.shareImage)
+        $(".salePriceRange").text(data.groupPriceRange)
+
+        $(".expressPrice").text("运费：" + data.expressPrice)
+        $(".totalStock").text("库存：" + data.totalStock)
+        $(".title1").text(data.specOneListTitle)
+
+        console.log(specId._data.specOneList = data.specOneList);
+        console.log(specId._data.specTwoList = data.specTwoList);
+
+        for (var i = 0; i < data.specOneList.length; i++) {
+//       $(".spec1").append("<li class='spec1_button' id='"+data.specOneList[i].specId+"' @click='spec1Button($event,index)'>"+data.specOneList[i].specName+"</li>")
+            $(".price").append("<li class='specOne_price' id='specOne_price" + i + "' style='display:none' value=" + data.specOneList[i].sku.groupPrice + ">" + "￥" + data.specOneList[i].sku.groupPrice + "</li>")
+            $(".price_sale").append("<li class='specOne_price_sale' id='specOne_price_sale" + i + "' style='display:none' value=" + data.specOneList[i].sku.salePrice + ">" + "￥" + data.specOneList[i].sku.salePrice + "</li>")
+            $(".totalStocks").append('<li class="specOne_totalStock" id="specOne_totalStock' + i + '" style="display:none">' + "库存：" + data.specOneList[i].sku.quantity + '</li>')
+        }
+
+        if (data.specTwoList.length == 0) {
+            $(".spec2").hide()
+        } else if (data.specTwoList.length > 1) {
+            $(".spec2").show().find(".title2").text(data.specTwoListTitle)
+            for (var i = 0; i < data.specTwoList.length; i++) {
+                $(".price").append("<li class='spectwo_price' id='spectwo_price" + i + "' value=" + data.specTwoList[i].specPrice + ">" + data.specTwoList[i].specPrice + "</li>")
+            }
+        }
+//  var share = {
+//      title: "来自花生馅市集的拼团邀请",
+//      imgUrl: 'http://htxq.oss-cn-beijing.aliyuncs.com/Peanut/Public/App/Icon/official.png?x-oss-process=image/resize,w_64',
+//      url: location.protocol + "//" + window.location.host + "/h5/WXactivity/shop_join.html?orderId=" + orderId + "&productId=" + productId + "&uno=" + uno,
+//      content: "花生馅"
+//  };
+//
+//  wx.ready(function () {
+//      weixinShare(share.title, share.url, share.imgUrl, share.content);
+//  });
+//      var varTitle = data.groupPrice + "元拼团" + data.goods.goodsName;
+//      var varContent = data.goods.goodsIntroduce;
+//      var varImgUrl = data.goods.goodsImage[0];
+//      // var varUrl = location.protocol + "//" + window.location.host + "/h5/WXactivity/shop_join.html?orderId=" + data.orderId + "&uno=" + uno + "&origin=" + origin;
+//
+//      share.title = varTitle;
+//      share.content = varContent;
+//      share.imgUrl = varImgUrl;
+//      share.url = varUrl;
+
+   }
+   function loginSuccessAction(){
+		window.location.reload();
+     // window.location.href = location.protocol + "//" + window.location.host + "/h5/WXactivity/groupbuy/collage_join.html?uno=" + uno + "&origin=" + origin + "&orderId=" + result.data.orderId;
+   }
+
+    if(getLocationHrefPara("from") == "look"){
+       $("#footer").hide();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+    var specId = new Vue({
+        el: '#commodity_box',
+        data: {
+            specOneList: {},
+            specTwoList: {},
+            tagList:{},
+            isactive: -2,
+            specOneId: "",
+            num: 1
+        },
+        methods: {
+            spec1Button(event, index) {
+                console.log(index, event.target.id)
+                this.isactive = index;
+                this.specOneId = event.target.id;
+                for (var i = 0; i < this.specOneList.length; i++) {
+                    $(".salePriceRange").hide()//拼团价范围
+                    $(".PriceRange").hide()//售价范围
+                    $(".totalStock").hide()//总库存
+                    $("#specOne_price" + i).hide().attr("class", "specOne_price")//拼团
+                    $("#specOne_price_sale" + i).hide().attr("class", "specOne_price")//售价
+                    $("#specOne_totalStock" + i).hide()
+                }
+                $("#specOne_price" + index).show().attr("class", "specOne_price specone_active")
+                 $("#specOne_price_sale" + index).show().attr("class", "specOne_price_sale specone_active")
+                $("#specOne_totalStock" + index).show()
+                $("#spectwo_price" + index).show().attr("class", "spectwo_price spectwo_active")
+                var specOnepay = $("#specOne_price" + index).val()
+                var specTwopay = $("#spectwo_price" + index).val()
+                console.log(parseFloat(specOnepay, 10), parseFloat(specTwopay, 10))
+            },
+            spec2Button(event, index) {
+                console.log(index, event.target.id)
+                this.isactive = index;
+//              this.show = index;
+//    		for(var i=0;i<this.specTwoList.length;i++){}
+                $("#spectwo_price" + index).show().attr("class", "spectwo_price spectwo_active")
+                var specOnepay = $("#specOne_price" + index).val()
+                var specTwopay = $("#spectwo_price" + index).val()
+                console.log(parseFloat(specOnepay, 10), parseFloat(specTwopay, 10))
+//              var b=
+//              var b = Number(specOnepay) + Number(specTwopay)
+//              $(".specone_active").text(b)
+            },
+            btnAdd() {
+                if (this.isactive == "-2") {
+                    $(".cart_alert").text("规格1不能为空").fadeIn().fadeOut()
+                }
+                var sub_num = ++this.num;
+                console.log($(".num").text(sub_num))
+                if (sub_num > 1) {
+                    $(".btn_reduce").attr("class", "btn_reduce")
+                }
+                $.ajax({
+                    url: location.protocol + "//" + window.location.host + "/peanut/order/confirmFromGoods?token=" + (localStorage.getItem("HTXQToken") || token) + "&customerId=" + userId + "&goodsId=" + productId+ "&specOneId=" + $(".specOneList_active").attr("id") + "&specTwoId=" + $(".specTwoList_active").attr("id") + "&quantity=" + sub_num,
+                    type: 'post',
+                    dataType: 'json',
+                    data: sub_num,
+                    success: function (result) {
+                        console.log(result);
+                        if (result.code == "000000") {
+                            if (sub_num > 1) {
+                                $(".btn_reduce").attr("class", "btn_reduce")
+                            }
+                            console.log("操作成功")
+                        }
+                    },
+                    error: function () {
+                        console.log("操作失败")
+                    }
+                });
+            },
+            btnReduce() {
+                if (this.isactive == "-2") {
+                    $(".cart_alert").text("规格1不能为空").fadeIn().fadeOut()
+                }
+//              if (this.num==1) {
+//              	this.num=1
+//                  $(".btn_reduce").attr("class","btn_reduce disabled")
+//              }
+
+                var sub_nums = --this.num
+                console.log($(".num").text(sub_nums))
+                if (sub_nums === 1) {
+                    sub_nums = 1
+                    console.log("禁用了哦")
+                }
+
+                if (this.num > 1) {
+                    $.ajax({
+                        url: location.protocol + "//" + window.location.host + "/peanut/order/confirmFromGoods?token=" + (localStorage.getItem("HTXQToken") || token)  + "&customerId=" + userId + "&goodsId=" +productId+ "&specOneId=" + $(".specOneList_active").attr("id") + "&specTwoId=" + $(".specTwoList_active").attr("id") + "&quantity=" + sub_nums,
+                        type: 'post',
+                        dataType: 'json',
+                        data: sub_nums,
+                        success: function (result) {
+                            console.log(result);
+                            if (result.code == "000000") {
+//	                            if (sub_num==1) {
+//				                    $(".btn_reduce").attr("class","btn_reduce disabled")
+//				                }else if(this.num>1){
+//				                	$(".btn_reduce").attr("class","btn_reduce")
+//				                }
+//				                $(".num").text(this.num)
+                                console.log("操作成功")
+                            }
+                        },
+                        error: function () {
+                            console.log("操作失败")
+                        }
+                    });
+                }
+
+            },
+        },
+   });
+    new Vue({
+        el: ".box_address",
+        data: {
+            userMsg: "",
+            ploneMsg: "",
+            resultMsg: "",
+            addressMsg: ""
+        },
+        methods: {
+            btnAddress(val) {
+
+                if ($("#user").val() == "") {
+                    $(".box_alert").text("请填写收货人").fadeIn(600).fadeOut(600);
+                    return;
+                } else if ($("#plone").val() == "") {
+                    $(".box_alert").text("请填写手机号码").fadeIn(600).fadeOut(600);
+                    return;
+                } else if ($("#cityResult").val() == "") {
+                    $(".box_alert").text("请填写所在地区").fadeIn(600).fadeOut(600);
+                    return;
+                } else if ($("#address").val() == "") {
+                    $(".box_alert").text("请填写详细地址").fadeIn(600).fadeOut(600);
+                    return;
+                }
+
+                if ($("#user").val() != "" && $("#plone").val() != "" && $("#address").val() != "" && $("#cityResult").val() != "") {
+                    $("#btn_address").css("background", "#323232")
+                }
+
+                $.ajax({
+                    url: location.protocol + "//" + window.location.host + "/peanut/address/add?customerId=" + userId + "&token=" + (localStorage.getItem("HTXQToken") || token) + "&name=" + this.userMsg + "&area=" + $("#cityResult").val() + "&address=" + this.addressMsg + "&mobile=" + this.ploneMsg + "&isDefault=1",
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log(result);
+                        if (result.code == "000000") {
+                            localStorage.setItem('ExistAddress', true);
+                            $("#commodity_screen").show();
+                            $(".commodity_attr_box").fadeIn(500)
+                            $(".box_address").hide()
+                            console.log("添加默认收货地址成功");
+                        } else {
+                            $(".box_alert").text(result.text).fadeIn(1500).fadeOut(1500);
+                            console.log("添加默认收货地址失败");
+                        }
+                    },
+                    error: function () {
+                        console.log("操作失败")
+                    }
+                });
+
+            }
+        }
+    });
+    
+        $(document).ready(function () {
+        $("#button_sale").on('click', function () {
+
+            $(this).attr("disable");
+
+var requestPaymentUrl = location.protocol + "//" + window.location.host + "/peanut/order/submitGroupFromGoods?customerId=" + userId + "&token=" + (localStorage.getItem("HTXQToken") || token) + "&goodsId="+productId+ "&specOneId=" + $(".specOneList_active").attr("id") + "&quantity=" + $(".num").text() + "&isGroup=0"
+            var specTwoId = $(".specTwoList_active").attr("id");
+            if (specTwoId) {
+                requestPaymentUrl = requestPaymentUrl + "&specTwoId=" + specTwoId;
+            }
+
+            $.ajax({
+                url: requestPaymentUrl,
+                type: 'post',
+                dataType: 'json',
+                success: function (result) {
+
+					$(".cart_alert").text("规格1不能为空").fadeIn().fadeOut()
+//					 $(".cart_alert").text(result.text).fadeIn().fadeOut()
+					 
+                    if (result.code == "000000") {
+						$(".cart_alert").text("规格1不能为空").hide()
+ 
+                        $.ajax({
+                            url: location.protocol + "//" + window.location.host + "/peanut/order/paymentWxpayJsApi?customerId=" + userId + "&token=" + (localStorage.getItem("HTXQToken") || token) + "&uniqueNo=" + result.data.uniqueNo + "&openId=" + openId,
+                            type: 'post',
+                            dataType: 'json',
+                            success: function (result) {
+
+                                console.log(result);
+
+                                if (result.code == "000000") {
+                                    WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                                        'appId': result.data.appId, 'timeStamp':result.data.timeStamp,                                         
+                                        'nonceStr': result.data.nonceStr, 'package':result.data.package,
+                                        'signType': result.data.signType, 'paySign':result.data.paySign,
+                                    }, function (res) {
+                                        if (res.err_img == "get_brand_wcpay_request:ok") {
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                            },
+                            error: function () {
+                                console.log("付款失败")
+                            }
+
+                        });
+                    } else if (result.code == "100000") {
+                        $(".commodity_attr_box").hide();
+                        $("#commodity_screen").hide();
+                        loginShow();
+
+                    }
+                },
+                error: function () {
+                    console.log("操作失败")
+                }
+
+            });
+        });
+        $("#button_group").on('click', function () {
+
+            $(this).attr("disable");
+
+var requestPaymentUrl = location.protocol + "//" + window.location.host + "/peanut/order/submitGroupFromGoods?customerId=" + userId + "&token=" + (localStorage.getItem("HTXQToken") || token) + "&goodsId="+productId+ "&specOneId=" + $(".specOneList_active").attr("id") + "&quantity=" + $(".num").text() + "&isGroup=1"
+            var specTwoId = $(".specTwoList_active").attr("id");
+            if (specTwoId) {
+                requestPaymentUrl = requestPaymentUrl + "&specTwoId=" + specTwoId;
+            }
+
+            $.ajax({
+                url: requestPaymentUrl,
+                type: 'post',
+                dataType: 'json',
+                success: function (result) {
+
+					$(".cart_alert").text("规格1不能为空").fadeIn().fadeOut()
+//					 $(".cart_alert").text(result.text).fadeIn().fadeOut()
+					 
+                    if (result.code == "000000") {
+						$(".cart_alert").text("规格1不能为空").hide()
+ 
+                        $.ajax({
+                            url: location.protocol + "//" + window.location.host + "/peanut/order/paymentWxpayJsApi?customerId=" + userId + "&token=" + (localStorage.getItem("HTXQToken") || token) + "&uniqueNo=" + result.data.uniqueNo + "&openId=" + openId,
+                            type: 'post',
+                            dataType: 'json',
+                            success: function (result) {
+
+                                console.log(result);
+
+                                if (result.code == "000000") {
+                                    WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                                        'appId': result.data.appId, 'timeStamp': result.data.timeStamp,
+                                        'nonceStr': result.data.nonceStr, 'package': result.data.package,
+                                        'signType': result.data.signType, 'paySign': result.data.paySign
+                                    }, function (res) {
+                                        if (res.err_msg == "get_brand_wcpay_request:ok") {
+//                                          window.location.reload();
+		     		                        window.location.href = "shop_join.html";
+                                        }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                                    });
+                                }
+                            },
+                            error: function () {
+                                console.log("付款失败")
+                            }
+                        });
+                    } else if (result.code == "100000") {
+
+                        $(".commodity_attr_box").hide();
+                        $("#commodity_screen").hide();
+                        loginShow();
+
+                    }
+                },
+                error: function () {
+                    console.log("操作失败")
+                }
+
+            });
+        });
+
+    });
+    (function () {
+        if (equip == "weixin") {        //为微信浏览器
+            if (!openId) {
+                var code = getLocationHrefPara("code");
+                if (code) {
+                    getWXUserInformation(code);
+                } else {
+                    weixinLogin(0);
+                }
+            }
+        } else {                          //为外部浏览器
+
+        }
+    })();        
+</script>
+</html>
